@@ -211,8 +211,8 @@ server <- function(input, output) {
     })
     output$comparison_table <- renderTable({
       # Extract predicted points and standard deviation of simulations for each team
-      team1_predicted_points <- average_team1_score
-      team2_predicted_points <- average_team2_score
+      team1_predicted_points <- (average_team1_score * .92)-2
+      team2_predicted_points <- (average_team2_score * .92)+2
       team1_sd_simulations <- sd(team1Scores)
       team2_sd_simulations <- sd(team2Scores)
       
