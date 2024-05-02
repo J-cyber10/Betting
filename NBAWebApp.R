@@ -152,8 +152,9 @@ server <- function(input, output) {
     
     # statistical tests on scores
     
+       
     # Simulate scores with added random components
-    set.seed(team1Score+team2Score)
+    set.seed(rnorm(100, mean=50, sd=1))
     num_simulations <- 500
     team1Scores <- replicate(num_simulations, {
       team1Score <- (team1ROE*((team1PPG+team2PAPG)/2)*team1RSP*team1_ATOR) + rnorm(1, mean = mean_error, sd = sd_error)
@@ -211,8 +212,8 @@ server <- function(input, output) {
     })
     output$comparison_table <- renderTable({
       # Extract predicted points and standard deviation of simulations for each team
-      team1_predicted_points <- (average_team1_score * .92)-2
-      team2_predicted_points <- (average_team2_score * .92)+2
+      team1_predicted_points <- (average_team1_score*.92) - 2
+      team2_predicted_points <- (average_team2_score*.92) + 2
       team1_sd_simulations <- sd(team1Scores)
       team2_sd_simulations <- sd(team2Scores)
       
@@ -236,7 +237,8 @@ server <- function(input, output) {
   observeEvent(input$stop, {
     stopApp()
   })
-}
 
+}
 # Run the application
 shinyApp(ui = ui, server = server)
+
