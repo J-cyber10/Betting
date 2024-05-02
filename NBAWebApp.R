@@ -154,7 +154,7 @@ server <- function(input, output) {
     
        
     # Simulate scores with added random components
-    set.seed(rnorm(100, mean=50, sd=1))
+    set.seed(rnorm(100, mean=50, sd=10))
     num_simulations <- 500
     team1Scores <- replicate(num_simulations, {
       team1Score <- (team1ROE*((team1PPG+team2PAPG)/2)*team1RSP*team1_ATOR) + rnorm(1, mean = mean_error, sd = sd_error)
